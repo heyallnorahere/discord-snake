@@ -71,7 +71,8 @@ class SnakeClient(discord.Client):
                 command = content[(index + len(prefix)):]
                 commands = {
                     "start": self.start_game,
-                    "stop": self.stop_game
+                    "stop": self.stop_game,
+                    "help": self.print_help
                 }
                 try:
                     await commands[command](message.channel, message.author.display_name)
@@ -119,6 +120,9 @@ class SnakeClient(discord.Client):
             await channel.send(f"Terminated **{user_name}**'s snake game.")
         except KeyError:
             await channel.send(f"**{user_name}**, you are not currently playing a game of snake!")
+    async def print_help(self, channel: discord.TextChannel, user_name: str):
+        command_prefix = self.config.command_prefix
+        await channel.send(f"To use this bot,\nSay `{command_prefix}start` to start a game,\nand `{command_prefix}stop` to stop it.")
     async def update_game_message(self, user_name: str):
         game = self.games[user_name]
         message = game.message
