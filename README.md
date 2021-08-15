@@ -5,3 +5,4 @@ idk lmao just run copy your bots token into `token.txt` enter settings into `con
 PYTHON_COMMAND="your python command"
 $PYTHON_COMMAND -m pip install -r requirements.txt
 $PYTHON_COMMAND -m discordsnake
+```
