@@ -17,6 +17,7 @@ class Game:
             self.snake_position = new_position
             self.generate_apple_position()
         else:
+                
             body_position_count = len(self.snake_body_positions)
             for i in range(body_position_count):
                 if i >= body_position_count - 1:
@@ -25,7 +26,16 @@ class Game:
                     new_body_position = self.snake_body_positions[i + 1]
                 self.snake_body_positions[i] = new_body_position
             self.snake_position = new_position
-            if self.is_snake_out_of_bounds() or self.snake_position in self.snake_body_positions:
+            if self.is_snake_out_of_bounds():
+                if self.snake_position[0] < 0:
+                    self.snake_position[0] = self.width - 1
+                elif self.snake_position[0] >= self.width:
+                    self.snake_position[0] = 0
+                if self.snake_position[1] < 0:
+                    self.snake_position[1] = self.height - 1
+                elif self.snake_position[1] >= self.height:
+                    self.snake_position[1] = 0
+            if self.snake_position in self.snake_body_positions:
                 self.game_running = False
     def generate_apple_position(self):
         positions = self.snake_body_positions.copy()
